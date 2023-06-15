@@ -26,12 +26,4 @@ public class Piece {
     public boolean isMaster() {
         return false;
     }
-
-    /**
-     * Método que devolve se a peça ainda está em jogo ou não
-     * @return Booleano true para caso esteja em jogo e false caso contrário
-     */
-    public boolean isAlive() {
-        return false;
-    }
 }

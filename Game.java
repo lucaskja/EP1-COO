@@ -44,7 +44,7 @@ public interface Game {
      * @exception InvalidCardException Caso uma carta que não está na mão do jogador seja usada
      * @exception InvalidPieceException Caso uma peça que não está no tabuleiro seja usada
      */
-    void makeMove(Piece piece, Card card, Position position) throws IncorrectTurnOrderException, IllegalMovementException, InvalidCardException, InvalidPieceException;
+    void makeMove(Card card, Position cardMove, Position currentPos) throws IncorrectTurnOrderException, IllegalMovementException, InvalidCardException, InvalidPieceException;
 
     /**
      * Método que confere se um jogador de uma determinada cor venceu o jogo. Critérios de vitória:
