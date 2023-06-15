@@ -1,7 +1,14 @@
+import java.util.Arrays;
+import java.util.Collections;
+
 /**
  * Classe que contém informações das cartas
  */
 public class Card {
+    private final String name;
+    private final Color color;
+    private final Position[] position;
+
     /**
      * Construtor que define os principais atributos de uma cara
      * @param name Nome da carta
@@ -9,7 +16,9 @@ public class Card {
      * @param positions Todas as posições relativas de movimento
      */
     public Card(String name, Color color, Position[] positions) {
-
+        this.name = name;
+        this.color = color;
+        this.position = positions;
     }
 
     /**
@@ -17,7 +26,7 @@ public class Card {
      * @return String que contém o nome da carta
      */
     public String getName() {
-        return null;
+        return this.name;
     }
 
     /**
@@ -25,7 +34,7 @@ public class Card {
      * @return Enum Color que contém a cor da carta
      */
     public Color getColor() {
-        return null;
+        return this.color;
     }
 
     /**
@@ -34,7 +43,7 @@ public class Card {
      * @return Um array de Position contendo todas as possíveis posições de movimento em relação ao ponto de origem
      */
     public Position[] getPositions() {
-        return null;
+        return this.position;
     }
 
     /**
@@ -42,5 +51,69 @@ public class Card {
      * @return Vetor de cartas com todas as cartas do jogo
      */
     public static Card[] createCards() {
-        return null;
-    }}
+        Position[] tigerPos = {
+            new Position(1,0),
+            new Position(-1,0),
+        };
+        Card tiger =  new Card("tiger", Color.BLUE, tigerPos);
+
+        Position[] frogPos = {
+            new Position(0,-2),
+            new Position(-1,-1),
+            new Position(1,1),
+        };
+        Card frog =  new Card("frog", Color.RED, frogPos);
+
+        Position[] crabPos = {
+            new Position(-1,0),
+            new Position(0,-2),
+            new Position(0,2),
+        };
+        Card crab =  new Card("crab", Color.BLUE, crabPos);
+
+        Position[] goosePos = {
+            new Position(-1,-1),
+            new Position(0,-1),
+            new Position(0,1),
+            new Position(1,1)
+        };
+        Card goose =  new Card("goose", Color.BLUE, goosePos);
+
+        Position[] dragonPos = {
+            new Position(-1,-2),
+            new Position(1,-1),
+            new Position(1,1),
+            new Position(-1,2),
+        };
+        Card dragon =  new Card("dragon", Color.RED, dragonPos);
+
+        Position[] rabbitPos = {
+                new Position(1,-1),
+                new Position(-1,1),
+                new Position(0,2),
+        };
+        Card rabbit =  new Card("rabbit", Color.BLUE, rabbitPos);
+
+        Position[] elephantPos = {
+                new Position(0,-1),
+                new Position(-1,-1),
+                new Position(0,1),
+                new Position(-1,1),
+        };
+        Card elephant =  new Card("elephant", Color.RED, elephantPos);
+
+        Position[] roosterPos = {
+                new Position(0,-1),
+                new Position(1,-1),
+                new Position(1,1),
+                new Position(-1,1),
+        };
+        Card rooster =  new Card("rooter", Color.RED, roosterPos);
+
+        Card[] cards = { tiger, frog, crab, goose, dragon, rabbit, elephant, rooster };
+
+        Collections.shuffle(Arrays.asList(cards));
+//        return new Card[]{ tiger, frog, crab, goose, dragon, rabbit, elephant, rooster };
+        return cards;
+    }
+}
