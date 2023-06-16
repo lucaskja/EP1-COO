@@ -54,7 +54,7 @@ public class Card {
     public static Card[] createCards() {
         Position[] tigerPos = {
             new Position(1,0),
-            new Position(-1,0),
+            new Position(-2,0),
         };
         Card tiger =  new Card("tiger", Color.BLUE, tigerPos);
 
