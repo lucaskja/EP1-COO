@@ -4,7 +4,7 @@
 public class Player {
     private final String name;
     private final Color pieceColor;
-    private Card[] cards = new Card[5];
+    private Card[] cards = new Card[2];
     /**
      * Construtor que define informações básicas do jogador
      * @param name Nome do jogador
@@ -69,6 +69,6 @@ public class Player {
             }
         }
 
-        throw new InvalidCardException("Jogador não possui a carta em sua mão");
+        throw new InvalidCardException("A carta escolhida não está na mão do jogador.");
     }
 }

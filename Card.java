@@ -9,6 +9,11 @@ public class Card {
     private final String name;
     private final Color color;
     private final Position[] position;
+    private final int numberOfPositions;
+
+    public int getNumberOfPositions() {
+        return numberOfPositions;
+    }
 
     /**
      * Construtor que define os principais atributos de uma cara
@@ -20,6 +25,7 @@ public class Card {
         this.name = name;
         this.color = color;
         this.position = positions;
+        this.numberOfPositions = this.position.length;
     }
 
     /**

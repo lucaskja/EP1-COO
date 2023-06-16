@@ -29,4 +29,8 @@ public class Position {
     public int getCol() {
         return this.col;
     }
+
+    public boolean equals(Position comp){
+        return (this.getRow() == comp.getRow() || this.getCol() == comp.getCol());
+    }
 }

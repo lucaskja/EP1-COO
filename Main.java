@@ -8,23 +8,79 @@ public class Main {
 
         System.out.println("--------------------------------------------------------------------");
 
-        Piece p1 = new Piece(Color.RED, false);
-        Piece p2 = new Piece(Color.RED, false);
-        Piece p3 = new Piece(Color.BLUE, false);
+//        Piece p1 = new Piece(Color.RED, false);
+//        Piece p2 = new Piece(Color.RED, false);
+//        Piece p3 = new Piece(Color.BLUE, false);
+//
+//        Spot s1 = new Spot(p1, new Position(0,0), Color.RED);
+//        Spot s2 = new Spot(p2, new Position(1,0), Color.RED);
+//        Spot s3 = new Spot(p3, new Position(2,2), Color.RED);
+        Position[] tigerPos = {
+                new Position(1,0),
+                new Position(-2,0),
+        };
+        Card tiger =  new Card("tiger", Color.BLUE, tigerPos);
 
-        Spot s1 = new Spot(p1, new Position(0,0), Color.RED);
-        Spot s2 = new Spot(p2, new Position(1,0), Color.RED);
-        Spot s3 = new Spot(p3, new Position(2,2), Color.RED);
+        Position[] frogPos = {
+                new Position(0,-2),
+                new Position(-1,-1),
+                new Position(1,1),
+        };
+        Card frog =  new Card("frog", Color.RED, frogPos);
 
+        Position[] crabPos = {
+                new Position(-1,0),
+                new Position(0,-2),
+                new Position(0,2),
+        };
+        Card crab =  new Card("crab", Color.BLUE, crabPos);
 
-        System.out.println(p1);
-        System.out.println(s1.getPiece());
+        Position[] goosePos = {
+                new Position(-1,-1),
+                new Position(0,-1),
+                new Position(0,1),
+                new Position(1,1)
+        };
+        Card goose =  new Card("goose", Color.BLUE, goosePos);
 
-        s1.occupySpot(p3);
-        s1.occupySpot(p2);
-        s1.occupySpot(p1); //Programa vai gerar uma runTime Exception. Caso queira rodar o main, comentar ou apagar essa linha.
+        Position[] dragonPos = {
+                new Position(-1,-2),
+                new Position(1,-1),
+                new Position(1,1),
+                new Position(-1,2),
+        };
+        Card dragon =  new Card("dragon", Color.RED, dragonPos);
 
-        System.out.println(p3);
-        System.out.println(s1.getPiece());
+        Position[] rabbitPos = {
+                new Position(1,-1),
+                new Position(-1,1),
+                new Position(0,2),
+        };
+        Card rabbit =  new Card("rabbit", Color.BLUE, rabbitPos);
+
+        Position[] elephantPos = {
+                new Position(0,-1),
+                new Position(-1,-1),
+                new Position(0,1),
+                new Position(-1,1),
+        };
+        Card elephant =  new Card("elephant", Color.RED, elephantPos);
+
+        Position[] roosterPos = {
+                new Position(0,-1),
+                new Position(1,-1),
+                new Position(1,1),
+                new Position(-1,1),
+        };
+        Card rooster =  new Card("rooster", Color.RED, roosterPos);
+
+        Card[] cards = { tiger, frog, crab, goose, dragon, rabbit, elephant, rooster };
+
+        GameImpl gi = new GameImpl("Guilherme", "Jahchan", cards);
+        gi.printBoard();
+        System.out.println(gi.getTableCard().getName());
+
+        gi.makeMove(cards[0], new Position(2,1), new Position(4, 1));
+        gi.printBoard();
     }
 }
