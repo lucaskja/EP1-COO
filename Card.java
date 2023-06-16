@@ -1,5 +1,6 @@
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.List;
 
 /**
  * Classe que contém informações das cartas
@@ -108,12 +109,13 @@ public class Card {
                 new Position(1,1),
                 new Position(-1,1),
         };
-        Card rooster =  new Card("rooter", Color.RED, roosterPos);
+        Card rooster =  new Card("rooster", Color.RED, roosterPos);
 
         Card[] cards = { tiger, frog, crab, goose, dragon, rabbit, elephant, rooster };
 
-        Collections.shuffle(Arrays.asList(cards));
-//        return new Card[]{ tiger, frog, crab, goose, dragon, rabbit, elephant, rooster };
-        return cards;
+        List<Card> cardList = Arrays.asList(cards);
+        Collections.shuffle(cardList);
+
+        return cardList.subList(0, 5).toArray(new Card[0]);
     }
 }
