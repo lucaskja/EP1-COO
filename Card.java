@@ -95,25 +95,25 @@ public class Card {
         Card dragon =  new Card("dragon", Color.RED, dragonPos);
 
         Position[] rabbitPos = {
-                new Position(1,-1),
-                new Position(-1,1),
-                new Position(0,2),
+            new Position(1,-1),
+            new Position(-1,1),
+            new Position(0,2),
         };
         Card rabbit =  new Card("rabbit", Color.BLUE, rabbitPos);
 
         Position[] elephantPos = {
-                new Position(0,-1),
-                new Position(-1,-1),
-                new Position(0,1),
-                new Position(-1,1),
+            new Position(0,-1),
+            new Position(-1,-1),
+            new Position(0,1),
+            new Position(-1,1),
         };
         Card elephant =  new Card("elephant", Color.RED, elephantPos);
 
         Position[] roosterPos = {
-                new Position(0,-1),
-                new Position(1,-1),
-                new Position(0,1),
-                new Position(-1,1),
+            new Position(0,-1),
+            new Position(1,-1),
+            new Position(0,1),
+            new Position(-1,1),
         };
         Card rooster =  new Card("rooster", Color.RED, roosterPos);
 
