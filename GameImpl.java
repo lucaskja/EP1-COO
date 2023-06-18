@@ -67,9 +67,10 @@ class GameImpl implements Game{
             throw new IllegalMovementException("Seu movimento (" + cardMove.getRow() + ", " + cardMove.getCol() + " está para fora do tabuleiro");
 
         for (int i = 0; i < card.getNumberOfPositions(); i++) {
-            if (currentPos.getRow() + card.getPositions()[i].getRow() == cardMove.getRow() && currentPos.getCol() + card.getPositions()[i].getCol() == cardMove.getCol()){
+            if(this.board[cardMove.getRow()][cardMove.getCol()].getPiece() != null)
                 if(this.board[cardMove.getRow()][cardMove.getCol()].getPiece().getColor() == this.board[currentPos.getRow()][currentPos.getCol()].getPiece().getColor())
                     throw new IllegalMovementException("Seu movimento (" + cardMove.getRow() + ", " + cardMove.getCol() + ")" + " é inválido pois você está tentando eliminar sua própria peça");
+            if (currentPos.getRow() + card.getPositions()[i].getRow() == cardMove.getRow() && currentPos.getCol() + card.getPositions()[i].getCol() == cardMove.getCol()){
                 this.board[cardMove.getRow()][cardMove.getCol()].setPiece(this.board[currentPos.getRow()][currentPos.getCol()].getPiece());
                 this.board[currentPos.getRow()][currentPos.getCol()].setPiece(null);
 
@@ -86,19 +87,19 @@ class GameImpl implements Game{
     public boolean checkVictory(Color color) {
         if (Objects.requireNonNull(color) == Color.RED) {
             if (this.board[0][2].getPiece() != null && this.board[0][2].getPiece().isMaster() && this.board[0][2].getPiece().getColor() == Color.RED){
-                System.out.println("O Player " + this.currentPlayerTurn.getName() + " (" + this.currentPlayerTurn.getPieceColor() + ") é o vencedor");
+                System.out.println("O Player " + this.currentPlayerTurn.getName() + " (" + this.currentPlayerTurn.getPieceColor() + ") é o vencedor por chegar no templo adversário");
                 this.isRunning = false;
                 return true;
             }
         } else {
-            if (this.board[0][2].getPiece() != null && this.board[4][2].getPiece().isMaster() && this.board[4][2].getPiece().getColor() == Color.BLUE){
-                System.out.println("O Player " + this.currentPlayerTurn.getName() + " (" + this.currentPlayerTurn.getPieceColor() + ") é o vencedor");
+            if (this.board[4][2].getPiece() != null && this.board[4][2].getPiece().isMaster() && this.board[4][2].getPiece().getColor() == Color.BLUE){
+                System.out.println("O Player " + this.currentPlayerTurn.getName() + " (" + this.currentPlayerTurn.getPieceColor() + ") é o vencedor por chegar no templo adversário");
                 this.isRunning = false;
                 return true;
             }
         }
         if(isMasterStillInTheBoard(color)){
-            System.out.println("O Player " + this.currentPlayerTurn.getName() + " (" + this.currentPlayerTurn.getPieceColor() + ") é o vencedor");
+            System.out.println("O Player " + this.currentPlayerTurn.getName() + " (" + this.currentPlayerTurn.getPieceColor() + ") é o vencedor por capturar o Mestre inimigo");
             this.isRunning = false;
         }
         return isMasterStillInTheBoard(color);

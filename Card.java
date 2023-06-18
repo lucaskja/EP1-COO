@@ -53,6 +53,14 @@ public class Card {
         return this.position;
     }
 
+    public void printPositions(){
+        System.out.println("Os movimentos da carta são: ");
+        for(int i = 0; i < numberOfPositions; i++){
+            System.out.println(this.position[i].getRow() + " " + this.position[i].getCol());
+        }
+        System.out.println("--------------------------------------------------------------------");
+    }
+
     /**
      * Método que cria todas as cartas do jogo, embaralha-as e devolve as 5 que serão utilizadas na partida.
      * @return Vetor de cartas com todas as cartas do jogo

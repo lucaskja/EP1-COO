@@ -58,6 +58,7 @@ public class Player {
     public void printCards(){
         for (int i = 0; i < this.cards.length; i++) {
             System.out.println("Carta (" + i + "): " + this.cards[i].getName());
+            this.cards[i].printPositions();
         }
     }
 
