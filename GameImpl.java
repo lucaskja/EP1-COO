@@ -81,10 +81,10 @@ class GameImpl implements Game{
 
     public boolean checkVictory(Color color) {
         if (Objects.requireNonNull(color) == Color.RED) {
-            if (this.board[0][2].getPiece().isMaster() && this.board[0][2].getPiece().getColor() == Color.RED)
+            if (this.board[0][2].getPiece() != null && this.board[0][2].getPiece().isMaster() && this.board[0][2].getPiece().getColor() == Color.RED)
                 return true;
         } else {
-            if (this.board[4][2].getPiece().isMaster() && this.board[4][2].getPiece().getColor() == Color.BLUE)
+            if (this.board[0][2].getPiece() != null && this.board[4][2].getPiece().isMaster() && this.board[4][2].getPiece().getColor() == Color.BLUE)
                 return true;
         }
         return !isMasterStillInTheboard(color);
