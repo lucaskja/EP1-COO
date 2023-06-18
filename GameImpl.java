@@ -19,8 +19,7 @@ class GameImpl implements Game{
     }
 
     public GameImpl(String p1, String p2, Card[] cards){
-//        this.cards = this.selectCards(cards);
-        this.cards = cards;
+        this.cards = this.selectCards(cards);
 
         this.p1 = new Player(p1, Color.RED, selectCardsForPlayer1(this.cards));
         this.p2 = new Player(p2, Color.BLUE, selectCardsForPlayer2(this.cards));
@@ -94,7 +93,7 @@ class GameImpl implements Game{
     private boolean isMasterStillInTheboard(Color color) {
         for (int i = 0; i < 5; i++) {
             for (int j = 0; j < 5; j++) {
-                if (this.board[i][j].getPiece().isMaster() && this.board[i][j].getPiece().getColor() == invertColor(color))
+                if (this.board[i][j].getPiece() != null && this.board[i][j].getPiece().isMaster() && this.board[i][j].getPiece().getColor() == invertColor(color))
                     return true;
             }
         }
