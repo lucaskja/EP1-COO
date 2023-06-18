@@ -112,7 +112,7 @@ public class Card {
         Position[] roosterPos = {
                 new Position(0,-1),
                 new Position(1,-1),
-                new Position(1,1),
+                new Position(0,1),
                 new Position(-1,1),
         };
         Card rooster =  new Card("rooster", Color.RED, roosterPos);
