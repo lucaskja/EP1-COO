@@ -9,6 +9,7 @@ class GameImpl implements Game{
     private Card tableCard;
     private final Spot[][] board = new Spot[5][5];
     private Player currentPlayerTurn;
+    private boolean isRunning;
 
     public GameImpl(){
         this("Player 1", "Player 2", Card.createCards());
@@ -19,6 +20,7 @@ class GameImpl implements Game{
     }
 
     public GameImpl(String p1, String p2, Card[] cards){
+        this.isRunning = true;
         this.cards = this.selectCards(cards);
 
         this.p1 = new Player(p1, Color.RED, selectCardsForPlayer1(this.cards));
@@ -66,6 +68,8 @@ class GameImpl implements Game{
 
         for (int i = 0; i < card.getNumberOfPositions(); i++) {
             if (currentPos.getRow() + card.getPositions()[i].getRow() == cardMove.getRow() && currentPos.getCol() + card.getPositions()[i].getCol() == cardMove.getCol()){
+                if(this.board[cardMove.getRow()][cardMove.getCol()].getPiece().getColor() == this.board[currentPos.getRow()][currentPos.getCol()].getPiece().getColor())
+                    throw new IllegalMovementException("Seu movimento (" + cardMove.getRow() + ", " + cardMove.getCol() + ")" + " é inválido pois você está tentando eliminar sua própria peça");
                 this.board[cardMove.getRow()][cardMove.getCol()].setPiece(this.board[currentPos.getRow()][currentPos.getCol()].getPiece());
                 this.board[currentPos.getRow()][currentPos.getCol()].setPiece(null);
 
@@ -81,23 +85,33 @@ class GameImpl implements Game{
 
     public boolean checkVictory(Color color) {
         if (Objects.requireNonNull(color) == Color.RED) {
-            if (this.board[0][2].getPiece() != null && this.board[0][2].getPiece().isMaster() && this.board[0][2].getPiece().getColor() == Color.RED)
+            if (this.board[0][2].getPiece() != null && this.board[0][2].getPiece().isMaster() && this.board[0][2].getPiece().getColor() == Color.RED){
+                System.out.println("O Player " + this.currentPlayerTurn.getName() + " (" + this.currentPlayerTurn.getPieceColor() + ") é o vencedor");
+                this.isRunning = false;
                 return true;
+            }
         } else {
-            if (this.board[0][2].getPiece() != null && this.board[4][2].getPiece().isMaster() && this.board[4][2].getPiece().getColor() == Color.BLUE)
+            if (this.board[0][2].getPiece() != null && this.board[4][2].getPiece().isMaster() && this.board[4][2].getPiece().getColor() == Color.BLUE){
+                System.out.println("O Player " + this.currentPlayerTurn.getName() + " (" + this.currentPlayerTurn.getPieceColor() + ") é o vencedor");
+                this.isRunning = false;
                 return true;
+            }
         }
-        return !isMasterStillInTheboard(color);
+        if(isMasterStillInTheBoard(color)){
+            System.out.println("O Player " + this.currentPlayerTurn.getName() + " (" + this.currentPlayerTurn.getPieceColor() + ") é o vencedor");
+            this.isRunning = false;
+        }
+        return isMasterStillInTheBoard(color);
     }
 
-    private boolean isMasterStillInTheboard(Color color) {
+    private boolean isMasterStillInTheBoard(Color color) {
         for (int i = 0; i < 5; i++) {
             for (int j = 0; j < 5; j++) {
                 if (this.board[i][j].getPiece() != null && this.board[i][j].getPiece().isMaster() && this.board[i][j].getPiece().getColor() == invertColor(color))
-                    return true;
+                    return false;
             }
         }
-        return false;
+        return true;
     }
 
     private Color invertColor(Color color){
@@ -109,9 +123,12 @@ class GameImpl implements Game{
         for (int i = 0; i < 5; i++) {
             for (int j = 0; j < 5; j++) {
                 if (board[i][j].getPiece() != null){
-                    if (board[i][j].getPiece().isMaster()) System.out.print(board[i][j].getPiece().getColor() + " M | ");
+                    if (board[i][j].getPiece().isMaster()){
+                        if(board[i][j].getPiece().getColor() == Color.BLUE) System.out.print("BLU M | ");
+                        else System.out.print(board[i][j].getPiece().getColor() + " M | ");
+                    } else if(board[i][j].getPiece().getColor() == Color.BLUE) System.out.print("BLU A | ");
                     else System.out.print(board[i][j].getPiece().getColor() + " A | ");
-                } else System.out.print("0 | ");
+                } else System.out.print("00000 | ");
             }
             System.out.println();
         }
@@ -157,5 +174,13 @@ class GameImpl implements Game{
     public void changeCurrentPlayerTurn() {
         if (this.currentPlayerTurn.equals(this.p1)) this.currentPlayerTurn = this.p2;
         else this.currentPlayerTurn = this.p1;
+    }
+
+    public boolean getIsRunning() {
+        return this.isRunning;
+    }
+
+    public Player getCurrentPlayerTurn() {
+        return this.currentPlayerTurn;
     }
 }

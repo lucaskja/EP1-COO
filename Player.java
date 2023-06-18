@@ -55,6 +55,12 @@ public class Player {
         return this.cards;
     }
 
+    public void printCards(){
+        for (int i = 0; i < this.cards.length; i++) {
+            System.out.println("Carta (" + i + "): " + this.cards[i].getName());
+        }
+    }
+
     /**
      * Método que troca uma carta da mão por outra carta (idealmente da mesa)
      * @param oldCard A carta que será substituída

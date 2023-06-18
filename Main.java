@@ -1,3 +1,5 @@
+import java.util.Scanner;
+
 public class Main {
     public static void main(String[] args) {
         Card[] allCards = Card.createCards();
@@ -15,72 +17,30 @@ public class Main {
 //        Spot s1 = new Spot(p1, new Position(0,0), Color.RED);
 //        Spot s2 = new Spot(p2, new Position(1,0), Color.RED);
 //        Spot s3 = new Spot(p3, new Position(2,2), Color.RED);
-        Position[] tigerPos = {
-                new Position(1,0),
-                new Position(-2,0),
-        };
-        Card tiger =  new Card("tiger", Color.BLUE, tigerPos);
 
-        Position[] frogPos = {
-                new Position(0,-2),
-                new Position(-1,-1),
-                new Position(1,1),
-        };
-        Card frog =  new Card("frog", Color.RED, frogPos);
-
-        Position[] crabPos = {
-                new Position(-1,0),
-                new Position(0,-2),
-                new Position(0,2),
-        };
-        Card crab =  new Card("crab", Color.BLUE, crabPos);
-
-        Position[] goosePos = {
-                new Position(-1,-1),
-                new Position(0,-1),
-                new Position(0,1),
-                new Position(1,1)
-        };
-        Card goose =  new Card("goose", Color.BLUE, goosePos);
-
-        Position[] dragonPos = {
-                new Position(-1,-2),
-                new Position(1,-1),
-                new Position(1,1),
-                new Position(-1,2),
-        };
-        Card dragon =  new Card("dragon", Color.RED, dragonPos);
-
-        Position[] rabbitPos = {
-                new Position(1,-1),
-                new Position(-1,1),
-                new Position(0,2),
-        };
-        Card rabbit =  new Card("rabbit", Color.BLUE, rabbitPos);
-
-        Position[] elephantPos = {
-                new Position(0,-1),
-                new Position(-1,-1),
-                new Position(0,1),
-                new Position(-1,1),
-        };
-        Card elephant =  new Card("elephant", Color.RED, elephantPos);
-
-        Position[] roosterPos = {
-                new Position(0,-1),
-                new Position(1,-1),
-                new Position(1,1),
-                new Position(-1,1),
-        };
-        Card rooster =  new Card("rooster", Color.RED, roosterPos);
-
-        Card[] cards = { tiger, frog, crab, goose, dragon, rabbit, elephant, rooster };
+        Card[] cards = Card.createCards();
 
         GameImpl gi = new GameImpl("Guilherme", "Jahchan", cards);
         gi.printBoard();
-        System.out.println(gi.getTableCard().getName());
+        Scanner scanner = new Scanner(System.in);
 
-        gi.makeMove(cards[0], new Position(2,1), new Position(4, 1));
-        gi.printBoard();
+        while(gi.getIsRunning()){
+            System.out.println("Vez do player: " + gi.getCurrentPlayerTurn().getName() + " (" + gi.getCurrentPlayerTurn().getPieceColor() + ")");
+            gi.getCurrentPlayerTurn().printCards();
+            System.out.println("Carta da Mesa: " + gi.getTableCard().getName());
+            System.out.print("Digite o Index da carta utilizada, a linha e coluna para onde você deseja ir e a posição da peça atual separado por espaços respectivamente: ");
+            String line = scanner.nextLine();
+            String[] numbers = line.split(" ");
+            int[] entrada = new int[5];
+            for (int i = 0; i < numbers.length; i++) {
+                try {
+                    entrada[i] = Integer.parseInt(numbers[i]);
+                } catch (NumberFormatException e) {
+                    throw new NumberFormatException("Invalid input. Please enter valid integers only.");
+                }
+            }
+            gi.makeMove(gi.getCurrentPlayerTurn().getCards()[entrada[0]], new Position(entrada[1],entrada[2]), new Position(entrada[3], entrada[4]));
+            gi.printBoard();
+        }
     }
 }
